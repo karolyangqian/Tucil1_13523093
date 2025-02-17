@@ -5,7 +5,7 @@ Program ini merupakan adaptasi dari permainan **IQ Puzzle Pro** yang merupakan p
 
 ## Teknologi yang Digunakan
 - **Bahasa Pemrograman** : Java
-- **Paradigma** : Brute Force
+- **Algoritma** : Brute Force
 
 ## Cara Mengkompilasi Program
 (Deskripsi cara mengkompilasi program akan ditambahkan di kemudian hari)
