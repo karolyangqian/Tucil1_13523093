@@ -8,12 +8,16 @@ Program ini merupakan adaptasi dari permainan **IQ Puzzle Pro** yang merupakan p
 - **Algoritma** : Brute Force
 
 ## Cara Mengkompilasi Program
-(Deskripsi cara mengkompilasi program akan ditambahkan di kemudian hari)
+```bash
+javac -d bin src/*.java src/iqpuzzlerpro/*.java
+```
 
 ## Cara Menjalankan Program
-(Deskripsi cara menjalankan program akan ditambahkan di kemudian hari)
+```bash
+java -cp bin Main
+```
 
 ## Informasi Pembuat
 **Nama**  : Karol Yangqian Poetracahya  
 **NIM**   : 13523093  
-**Jurusan** : Teknik Informatika  
+**Jurusan** : Teknik Informatika
