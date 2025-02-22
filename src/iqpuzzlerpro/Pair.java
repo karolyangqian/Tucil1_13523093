@@ -2,25 +2,25 @@ package iqpuzzlerpro;
 
 import java.util.Objects;
 
-class Pair<K, V> {
-    public final K key;
-    public final V value;
+public class Pair<K, V> {
+    public final K first;
+    public final V second;
 
-    public Pair(K key, V value) {
-        this.key = key;
-        this.value = value;
+    public Pair(K first, V second) {
+        this.first = first;
+        this.second = second;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Pair<?, ?> p) {
-            return this.key.equals(p.key) && this.value.equals(p.value);
+            return this.first.equals(p.first) && this.second.equals(p.second);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(key, value);
+        return Objects.hash(first, second);
     }
 }

@@ -4,15 +4,23 @@ import java.util.*;
 public class Piece2D {
 
     private final int id;
+    private final String symbol;
     private final Vec2I[] shape;
+    private int state;
 
-    public Piece2D(int id, Vec2I[] shape) {
+    public Piece2D(int id, String symbol, Vec2I[] shape) {
         this.id = id;
+        this.symbol = symbol;
         this.shape = shape;
+        this.state = 0;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getSymbol() {
+        return symbol;
     }
 
     public Vec2I[] getShape() {
@@ -38,20 +46,15 @@ public class Piece2D {
         return false;
     }
 
-    public void print(String c, int width, int height, int offsetX, int offsetY) {
-        System.out.print("Piece " + id + ": ");
+    public void print(int rows, int cols, int offsetX, int offsetY) {
+        printShape();
         Piece2D tempPiece = this.copy();
-        int n = shape.length;
-        for (int i = 0; i < n; i++) {
-            System.err.print("(" + shape[i].x + ", " + shape[i].y + ") ");
-        }
-        System.err.println();
         tempPiece.setPosition(new Vec2I(offsetX, offsetY));
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 Vec2I v = new Vec2I(i, j);
                 if (tempPiece.contains(v)) {
-                    System.out.print(c);
+                    System.out.print(symbol);
                 } else {
                     System.out.print(" ");
                 }
@@ -61,10 +64,15 @@ public class Piece2D {
     }
 
     public void printShape() {
-        System.out.println("Piece " + id);
+        System.out.print("Piece " + id + " " + symbol + ": ");
         for (Vec2I v : shape) {
-            System.out.println(v.x + " " + v.y);
+            System.out.print("(" + v.x + ", " + v.y + ") ");
         }
+        System.out.println();
+    }
+
+    public Vec2I getPosition() {
+        return shape[0].copy();
     }
 
     public final void setPosition(Vec2I position) {
@@ -79,15 +87,13 @@ public class Piece2D {
         }
     }
 
+    public void setPosition(int x, int y) {
+        setPosition(new Vec2I(x, y));
+    }
+
     public void flipHorizontal() {
         for (Vec2I v : shape) {
             v.mirrorX(shape[0].x);
-        }
-    }
-
-    public void flipVertical() {
-        for (Vec2I v : shape) {
-            v.mirrorY(shape[0].y);
         }
     }
 
@@ -96,19 +102,49 @@ public class Piece2D {
         for (int i = 0; i < shape.length; i++) {
             newShape[i] = new Vec2I(shape[i].x, shape[i].y);
         }
-        return new Piece2D(id, newShape);
+        return new Piece2D(id, symbol, newShape);
     }
 
-    public static Piece2D formStringList(int newId, String[] list) {
+    public static Piece2D stringArrayToPiece2D(int newId, String newSymbol, String[] array) {
         ArrayList<Vec2I> newShapeList = new ArrayList<>();
-        for (int i = 0; i < list.length; i++) {
-            String[] split = list[i].split("");
+        for (int i = 0; i < array.length; i++) {
+            String[] split = array[i].split("");
             for (int j = 0; j < split.length; j++) {
                 if (!split[j].equals(" ")) {
                     newShapeList.add(new Vec2I(i, j));
                 }
             }
         }
-        return new Piece2D(newId, newShapeList.toArray(Vec2I[]::new));
+        return new Piece2D(newId, newSymbol, newShapeList.toArray(Vec2I[]::new));
     }
+
+    public int getState() {
+        return state;
+    }
+
+    public void nextState() {
+        rotateOnce();
+        if (this.state == 3 || this.state == 7) {
+            flipHorizontal();
+        }
+        this.state = (this.state + 1) % 8;
+    }
+
+    /**
+     * Set the state of the piece
+     * @param r row in board
+     * @param c column in board
+     * @param state rotational and flip state 0-7
+     */
+    public void setState(int r, int c, int state) {
+        setPosition(r, c);
+        int rot = state % 4;
+        int flip = state / 4;
+        for (int i = 0; i < rot; i++) {
+            rotateOnce();
+        }
+        if (flip == 1) flipHorizontal();
+        this.state = state;
+    }
+
 }

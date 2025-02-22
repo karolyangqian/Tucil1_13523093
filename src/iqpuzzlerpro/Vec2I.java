@@ -3,7 +3,13 @@ package iqpuzzlerpro;
 import java.util.Objects;
 
 public class Vec2I extends Object {
+    /**
+     * Row wise
+     */
     public int x;
+    /**
+     * Column wise
+     */
     public int y;
 
     public Vec2I(int x, int y) {
