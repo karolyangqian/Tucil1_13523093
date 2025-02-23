@@ -294,8 +294,6 @@ public class Main {
 
         boolean saveResult = yesNoPrompt("Save result? (y/n):");
         if (saveResult) {
-            // String savePath = pathPrompt("Enter the path to save the result (default: test/result.txt):", "test/result.txt");
-            // FileHandle.saveResult(Solver.getResult(), savePath);
             saveFileDialog(Solver.getResult());
         }
         System.err.println("Program ended.");
