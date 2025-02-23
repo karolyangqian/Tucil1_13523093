@@ -68,7 +68,7 @@ public class FileHandle {
 
     // Line valid tidak memiliki lebih dari satu jenis karakter selain space
     private static boolean isValidPieceLine(String line) {
-        if (line == null) return false; 
+        if (line == null) return false;
 
         Set<Character> charSet = new HashSet<>();
         for (char c : line.toCharArray()) {
@@ -78,10 +78,10 @@ public class FileHandle {
         return true;
     }
 
-    private static Character getPieceLineSymbol(String line) {
+    private static String getPieceLineSymbol(String line) {
         for (int i = 0; i < line.length(); i++) {
             char c = line.charAt(i);
-            if (c != ' ') return c;
+            if (c != ' ') return Character.toString(c);
         }
         return null;
     }
@@ -104,12 +104,11 @@ public class FileHandle {
             }
         }
 
-        // 
-        char prev = getPieceLineSymbol(rawPiecesList.get(0));
+        String prev = getPieceLineSymbol(rawPiecesList.get(0));
         ArrayList<String> aPiece = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            char current = getPieceLineSymbol(rawPiecesList.get(i));
-            if (current != prev) {
+            String current = getPieceLineSymbol(rawPiecesList.get(i));
+            if (!current.equals(prev)) {
                 pieces.add(aPiece.toArray(String[]::new));
                 aPiece.clear();
             }
@@ -124,6 +123,7 @@ public class FileHandle {
 
     public static void readPieces(ProgramInput programInput, BufferedReader br) throws IOException {
         ArrayList<String[]> piecesList = readPieceToList(br);
+ 
         if (piecesList.size() != programInput.pieceCount) {
             throw new IOException("Expected " + programInput.pieceCount + " pieces, but received " + piecesList.size());
         }
@@ -177,7 +177,7 @@ public class FileHandle {
                 }
             }
 
-            writer.println(result.board.getRows() + " " + result.board.getCols());
+            writer.println(result.board.getRows() + " " + result.board.getCols() + " " + pieces.length);
             for (int i = 0; i < result.board.getRows(); i++) {
                 for (int j = 0; j < result.board.getCols(); j++) {
                     if (charBoard[i][j] == null) {
@@ -197,13 +197,13 @@ public class FileHandle {
                 writer.println();
             }
 
-            writer.println(pieces.length);
             for (Piece2D piece : pieces) {
-                writer.println(Integer.toString(piece.getId()) + piece.getSymbol());
+                writer.println(Integer.toString(piece.getId()) + " " + piece.getSymbol());
                 writer.println(piece.getPosition().x + " " + piece.getPosition().y + " " + piece.getState());
             }   
 
         } catch (Exception e) {
+            System.err.println(e);
         }
     }
 

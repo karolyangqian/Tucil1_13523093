@@ -37,7 +37,7 @@ public class Board2D {
 
         boolean[][] newAvailablePlacesArray = new boolean[availablePlaces.length][];
         for (int i = 0; i < availablePlaces.length; i++) {
-            newAvailablePlacesArray[i] = availablePlaces[i].clone();
+            newAvailablePlacesArray[i] = board[i].clone();
         }
 
         Board2D newBoard = new Board2D(rows, cols, newBoardArray);
@@ -62,9 +62,7 @@ public class Board2D {
     public void clearPieces() {
         pieces.clear();
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                availablePlaces[i][j] = board[i][j];
-            }
+            System.arraycopy(board[i], 0, availablePlaces[i], 0, cols);
         }
     }
 
@@ -190,5 +188,14 @@ public class Board2D {
 
     public Piece2D[] getPieces() {
         return pieces.toArray(Piece2D[]::new);
+    }
+
+    public void printAvailablePlaces() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print(availablePlaces[i][j] ? "1" : "0");
+            }
+            System.out.println();
+        }
     }
 }

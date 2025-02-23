@@ -1,6 +1,8 @@
 import iqpuzzlerpro.*;
+import java.awt.*;
 import java.io.File;
 import java.util.*;
+
 
 public class Main {
     public static void driver1() {
@@ -225,6 +227,31 @@ public class Main {
         return defaultPath;
     }
 
+    public static void saveFileDialog(Result result) {
+        Frame frame = new Frame();
+        FileDialog fileDialog = new FileDialog(frame, "Save result to file", FileDialog.SAVE);
+        fileDialog.setFile("result.txt");
+        fileDialog.setVisible(true);
+
+        String directory = fileDialog.getDirectory();
+        String filename = fileDialog.getFile();
+
+        if (directory != null && filename != null) {
+            if (!filename.toLowerCase().endsWith(".txt")) {
+                filename += ".txt";
+            }
+            File file = new File(directory, filename);
+
+            try {
+                FileHandle.saveResult(result, file.getAbsolutePath());
+                System.out.println("File saved successfully as " + file.getAbsolutePath());
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }
+        frame.dispose();
+    }
+    
     public static void startProgram() {
         String path = "test/tc4.txt";
 
@@ -246,6 +273,7 @@ public class Main {
         colorMapPath = pathPrompt("Enter the path to the color map file (default:" + colorMapPath + "):", colorMapPath);
 
         Solver.setColorMap(colorMapPath);
+        Map<Integer, Integer> colorMap = FileHandle.readColorMap(colorMapPath);
 
         boolean printResult = yesNoPrompt("Print result? (y/n):");
         boolean printProgress = yesNoPrompt("Print progress? (y/n):");
@@ -266,8 +294,9 @@ public class Main {
 
         boolean saveResult = yesNoPrompt("Save result? (y/n):");
         if (saveResult) {
-            String savePath = pathPrompt("Enter the path to save the result (default: test/result.txt):", "test/result.txt");
-            FileHandle.saveResult(Solver.getResult(), savePath);
+            // String savePath = pathPrompt("Enter the path to save the result (default: test/result.txt):", "test/result.txt");
+            // FileHandle.saveResult(Solver.getResult(), savePath);
+            saveFileDialog(Solver.getResult());
         }
         System.err.println("Program ended.");
 

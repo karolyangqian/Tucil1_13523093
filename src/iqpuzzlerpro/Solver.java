@@ -39,34 +39,23 @@ public class Solver {
                 colorMap.put(piece.getId(), 15);
             }
         }
-        board.printEmptyBoard(".", "x");
+
         startTime = System.nanoTime();
         boolean solved = attempt(0, 0, 0, 0, printProgress);
         long endTime = System.nanoTime();
-        board.printEmptyBoard(".", "x");
 
         double timeTaken = (double) (endTime - startTime) / 1e6;
 
-        // result.board = board;
-        // result.time = timeTaken;
-        // result.iterations = iterations;
         if (solved) {
             result = new Result(true, board.copy(), timeTaken, iterations);
-            // result.isSolved = true;
         } else {
             result = new Result(false, board.copy(), timeTaken, iterations);
-            // result.isSolved = false;
         }
 
         if (printResult) {
             if (solved) {
                 board.printBoardStandard(colorMap);
                 System.out.printf("\nSolved in %.3f ms with %d iterations\n", timeTaken, iterations);
-                // Board2D solvedBoard = board.copy();
-                // solvedBoard.printBoardStandard(colorMap);
-                // board.printEmptyBoard(".", "x");
-                // board.printBoardStandard(colorMap);
-                
             } else {
                 // board.clearPieces();
                 System.out.printf("\nCannot solve board with given pieces. Checked %d iterations in %.3f ms\n", iterations, timeTaken);
@@ -85,8 +74,8 @@ public class Solver {
     
     private static void printProgress(long startTime) {
         long elapsedTime = System.nanoTime() - startTime;
-        System.out.printf("Iterations: %d | Time: %.3f ms\n", iterations, elapsedTime / 1e9);
         board.printBoardStandard(colorMap);
+        System.out.printf("Iterations: %d | Time: %.3f ms\n", iterations, elapsedTime / 1e9);
     }
     
     private static boolean attempt(int pieceIndex, int r, int c, int rot, boolean printProgress) {
