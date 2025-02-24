@@ -1,0 +1,26 @@
+Solved in 58.3869 ms with 283559 iterations
+5 5 7
+ABBCC
+AABDC
+EEEDD
+EEFFF
+GGGFF
+1 2 2 3 3 
+1 1 2 4 3 
+5 5 5 4 4 
+5 5 6 6 6 
+7 7 7 6 6 
+1 A
+0 0 0
+2 B
+0 1 5
+3 C
+0 3 5
+4 D
+1 3 0
+5 E
+2 0 5
+6 F
+3 4 3
+7 G
+4 0 0

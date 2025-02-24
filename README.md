@@ -5,7 +5,13 @@ Program ini merupakan adaptasi dari permainan **IQ Puzzle Pro** yang merupakan p
 
 ## Teknologi yang Digunakan
 - **Bahasa Pemrograman** : Java
+- **Dependencies** : Java Development Kit (JDK)
 - **Algoritma** : Brute Force
+
+## Clone Repository
+```bash
+git clone https://github.com/karolyangqian/Tucil1_13523093.git
+```
 
 ## Cara Mengkompilasi Program
 ```bash
@@ -16,6 +22,10 @@ javac -d bin src/*.java src/iqpuzzlerpro/*.java
 ```bash
 java -cp bin Main
 ```
+
+## Simulasi Cara Menjalankan Program
+Silakan tekan gambar untuk menonton video simulasi menjalankan program.
+[![Simulasi menjalankan program](simulasi-preview.png)](simulasi.mp4)
 
 ## Informasi Pembuat
 **Nama**  : Karol Yangqian Poetracahya  

@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.*;
 
 public class FileHandle {
-    public static Map<Integer, Integer> readColorMap(String filename) {
+    public static Map<Integer, Integer> readColorMap(String filename) throws IOException {
         Map<Integer, Integer> colorMap = new HashMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -12,6 +12,7 @@ public class FileHandle {
                 colorMap.put(Integer.valueOf(parts[0]), Integer.valueOf(parts[1]));
             }
         } catch (Exception e) {
+            throw new IOException("Invalid color map file");
         }
         return colorMap;
     }

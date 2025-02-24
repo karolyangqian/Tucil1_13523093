@@ -1,4 +1,5 @@
 package iqpuzzlerpro;
+import java.io.IOException;
 import java.util.*;
 
 public class Solver {
@@ -15,9 +16,13 @@ public class Solver {
     private static boolean colorMapSet = false;
     private static Result result;
 
-    public static void setColorMap(String filename) {
-        colorMap = FileHandle.readColorMap(filename);
-        colorMapSet = true;
+    public static void setColorMap(String filename) throws IOException {
+        try {
+            colorMap = FileHandle.readColorMap(filename);
+            colorMapSet = true;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public static Result getResult() {

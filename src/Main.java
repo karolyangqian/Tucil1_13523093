@@ -65,27 +65,38 @@ public class Main {
     }
     
     public static void startProgram() {
-        String path = "test/tc4.txt";
 
-        path = pathPrompt("Enter the path to the test case file (default:" + path + "):", path);
+        System.out.println("\nIQPuzzlerPro Solver!!!\n\n");
 
         ProgramInput programInput; 
+        String path = "test/input.txt";
         
-        try {
-            programInput = FileHandle.readProgramInput(path);
-        } catch (Exception e) {
-            System.err.println(e);
-            return;
+        while (true) {
+            try {
+                path = pathPrompt("Enter the path to the test case file (default:" + path + "):", path);
+                programInput = FileHandle.readProgramInput(path);
+                break;
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
         }
         
         programInput.print();
         System.err.println();
         
-        String colorMapPath = "src/colors/colors0.txt";
-        colorMapPath = pathPrompt("Enter the path to the color map file (default:" + colorMapPath + "):", colorMapPath);
-
-        Solver.setColorMap(colorMapPath);
-        Map<Integer, Integer> colorMap = FileHandle.readColorMap(colorMapPath);
+        String colorMapPath = "src/colors/colors.txt";
+        Map<Integer, Integer> colorMap;
+        
+        while (true) {
+            try {
+                colorMapPath = pathPrompt("Enter the path to the color map file (default:" + colorMapPath + "):", colorMapPath);
+                colorMap = FileHandle.readColorMap(colorMapPath);
+                Solver.setColorMap(colorMapPath);
+                break;
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        }
 
         boolean printResult = yesNoPrompt("Print result? (y/n):");
         boolean printProgress = yesNoPrompt("Print progress? (y/n):");
