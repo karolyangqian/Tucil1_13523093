@@ -122,20 +122,6 @@ public class Piece2D {
         return state;
     }
 
-    public void nextState() {
-        rotateOnce();
-        if (this.state == 3 || this.state == 7) {
-            flipHorizontal();
-        }
-        this.state = (this.state + 1) % 8;
-    }
-
-    /**
-     * Set the state of the piece
-     * @param r row in board
-     * @param c column in board
-     * @param state rotational and flip state 0-7
-     */
     public void setState(int r, int c, int state) {
         setPosition(r, c);
         int rot = state % 4;

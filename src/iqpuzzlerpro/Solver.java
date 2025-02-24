@@ -80,7 +80,6 @@ public class Solver {
     
     private static boolean attempt(int pieceIndex, int r, int c, int rot, boolean printProgress) {
         if (pieceIndex == numOfPieces) {
-            // System.err.println("4");
             return board.isSolved();
         }
         
@@ -97,15 +96,12 @@ public class Solver {
         iterations++;
 
         if (rot == NUM_OF_ROT_STATES){
-            // System.err.println("1");
             return attempt(pieceIndex, r, c+1, 0, printProgress);
-        } 
+        }
         if (c == cols) {
-            // System.err.println("2");
             return attempt(pieceIndex, r+1, 0, rot, printProgress);
         } 
         if (r == rows) {
-            // System.err.println("3");
             return false;
         } 
 
