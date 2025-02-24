@@ -63,7 +63,7 @@ public class Solver {
                 System.out.printf("\nSolved in %.3f ms with %d iterations\n", timeTaken, iterations);
             } else {
                 // board.clearPieces();
-                System.out.printf("\nCannot solve board with given pieces. Checked %d iterations in %.3f ms\n", iterations, timeTaken);
+                System.out.printf("\nCannot solve the board with given pieces. Checked %d iterations in %.3f ms\n", iterations, timeTaken);
             }
         }
         return solved;

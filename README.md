@@ -24,8 +24,7 @@ java -cp bin Main
 ```
 
 ## Simulasi Cara Menjalankan Program
-Silakan tekan gambar untuk menonton video simulasi menjalankan program.
-[![Simulasi menjalankan program](simulasi-preview.png)](simulasi.mp4)
+![Simulasi menjalankan program](doc/simulasi.gif)
 
 ## Informasi Pembuat
 **Nama**  : Karol Yangqian Poetracahya  
